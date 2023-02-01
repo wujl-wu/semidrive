@@ -1071,9 +1071,11 @@
 			#clock-cells = <1>;
 			clocks = <&EMMC2>;
 			clock-names = "core";
-			max-frequency = <100000000>;
+			max-frequency = <200000000>;
+			vmmc-supply = <&vmmc_3v3>;
+                        vqmmc-supply = <&vqmmc_3v3>;
 			//vmmc-supply = <&vmmc_3v3>;
-			vqmmc-supply = <&vqmmc_1v8>;
+			//vqmmc-supply = <&vqmmc_1v8>;
 			status = "disabled";
 		};
 
@@ -1408,9 +1410,9 @@
 					remote-endpoint = <&parallel_in_crtc0>;
 				};
 				
-				 crtc1_out_interface: endpoint@1 {
+			/*	 crtc1_out_interface: endpoint@1 {
                         		remote-endpoint = <&parallel_in_crtc1>;
-                		};
+                		};*/
 
 			};
 		};
@@ -1439,7 +1441,7 @@
 				};
 			};
 		};
-		
+		/*
 		parallel1: parallel@1 {
 			compatible = "semidrive, kunlun-display-parallel";
 			status = "disabled";
@@ -1464,7 +1466,7 @@
 				};
 			};
 		};
-
+*/
 		lvds0: lvds0@30660000 {
 			compatible = "semidrive, kunlun-display-lvds";
 			reg = <LVDS_BASE LVDS_RANGE>;
@@ -1496,7 +1498,7 @@
 				};
 			};
 		};
-
+/*
 		lvds1: lvds1@30670000 {
 			compatible = "semidrive, kunlun-display-lvds";
 			reg = <LVDS_BASE LVDS_RANGE>;
@@ -1527,7 +1529,7 @@
 					};
 				};
 			};
-		};
+		};*/
 
 		dsi0: dsi0@30D60000 {
 			compatible = "semidrive,dsi-host";
@@ -1563,11 +1565,11 @@
 		ptimings1: parallel-timings@1 {
 			compatible = "semidrive,panel-simple";
 			status = "disabled";
-			port {
+			/*port {
 				parall_panel1_in: endpoint {
 					remote-endpoint = <&parallel_out_timing1>;
 				};
-			};
+			};*/
 
 			dtimings1: display-timings {
 			};
