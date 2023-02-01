@@ -864,7 +864,7 @@
 	clocks = <&EMMC3>;
 	clock-names = "core";
 	max-frequency = <100000000>;
-	cd-gpios = <&port4b 30 GPIO_ACTIVE_LOW>;//gpio62 - GPIO_C14
+	cd-gpios = <&port4a 3 GPIO_ACTIVE_LOW>;//gpio4a - GPIO_A3
 	//pwr-gpios = <&port4b 25 GPIO_ACTIVE_HIGH>;//gpio_c9
 	bus-width = <4>;
 	no-mmc;
