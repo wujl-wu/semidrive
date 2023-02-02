@@ -390,11 +390,12 @@
 };
 
 &i2c2 {
+/*
         status = "okay";
 		rx8025t: rx8025t@32 {
 		compatible = "epson,rx8025";
 		reg = <0x32>;
-    };
+    };*/
 };
 
 &i2c3 {
@@ -448,7 +449,7 @@
 };
 
 &i2c9 {
-	status = "disabled";
+	status = "okay";
 	
 	ov5640_mipi: ov5640_mipi@3c {
 		compatible = "ovti,ov5640_mipi";
@@ -466,6 +467,11 @@
 		pwn-gpios = <&port4d 18 GPIO_ACTIVE_HIGH>;//GPIO_G10 - gpio114
 		rst-gpios = <&port4d 19 GPIO_ACTIVE_HIGH>;//GPIO_G11 - gpio115
 	};
+
+                rx8025t: rx8025t@32 {
+                compatible = "epson,rx8025";
+                reg = <0x32>;
+    };
 };
 
 &i2c10 {
