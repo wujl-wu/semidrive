@@ -45,6 +45,9 @@ obj-$(CONFIG_SND_G9_REF_MACH) += snd-g9-ref-mach.o
 snd-d9-ref-mach-es7243e-objs := d9-ref-mach-es7243e.o
 obj-$(CONFIG_SND_D9_REF_MACH_ES7243E) += snd-d9-ref-mach-es7243e.o
 
+snd-d9-ref-mach-sgtl5000p-objs := d9-ref-mach-sgtl5000p.o
+obj-$(CONFIG_SND_D9_REF_MACH_SGTL5000P) += snd-d9-ref-mach-sgtl5000p.o
+
 snd-d9-ref-mach-es7144-objs := d9-ref-mach-es7144.o
 obj-$(CONFIG_SND_D9_REF_MACH_ES7144) += snd-d9-ref-mach-es7144.o
 

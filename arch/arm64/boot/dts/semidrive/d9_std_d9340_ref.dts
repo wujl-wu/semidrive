@@ -109,6 +109,12 @@
 		stdout-path = "serial0";
 	};
 
+	sys_mclk: clock-mclk {
+                compatible = "fixed-clock";
+                #clock-cells = <0>;
+                clock-frequency = <12000000>;
+        };
+
 	vdd_12: fixed-vdd_12 {
 		compatible = "regulator-fixed";
 		regulator-name = "vdd_12v";
@@ -146,20 +152,26 @@
 
 	es7134: codec@es7134 {
 		compatible = "everest,es7134";
-		status = "okay";
+		status = "disabled";
 	};
 
 	sound_es7243e: sound@es7243e {
 		compatible = "semidrive,d9-ref-es7243e";
 		semidrive,audio-codec = <&es7243e>;
-		status = "okay";
+		status = "disabled";
 	};
+
+	sound_sgtl5000p: sound@sgtl5000p {
+               compatible = "semidrive,d9-ref-sgtl5000p";
+                semidrive,audio-codec = <&sgtl5000>;
+                status = "okay";
+        };
 
 	sound_es7144: sound@es7144 {
 		compatible = "semidrive,d9-ref-es7144";
 		semidrive,audio-codec = <&es7134>;
 		//semidrive,jack-gpio = <&port4b 29 GPIO_ACTIVE_HIGH>;
-		status = "okay";
+		status = "disabled";
 	};
 
 	leds {
@@ -279,10 +291,11 @@
 };
 
 &afe_i2s_sc2{
-//sch part u19(codec dac es7144)
-	dmas = <&dmac4 X9_DMA_SLV_ID_I2S_SC3_TX>, <&dmac4 X9_DMA_SLV_ID_I2S_SC3_RX>;
-	dma-names = "tx", "rx";
-	status = "okay";
+	//sch part u20(codec adc es7243)
+        dmas = <&dmac4 X9_DMA_SLV_ID_I2S_SC3_TX>, <&dmac4 X9_DMA_SLV_ID_I2S_SC3_RX>;
+        dma-names = "tx", "rx";
+        semidrive,full-duplex = <0>;
+        status = "okay";
 };
 
 &afe_i2s_sc3{
@@ -290,7 +303,7 @@
 	dmas = <&dmac4 X9_DMA_SLV_ID_I2S_SC4_TX>, <&dmac4 X9_DMA_SLV_ID_I2S_SC4_RX>;
 	dma-names = "tx", "rx";
 	semidrive,full-duplex = <0>;
-	status = "okay";
+	status = "disabled";
 };
 
 &afe_i2s_sc5{
@@ -387,6 +400,19 @@
 			reg = <0x50>;
 			//pagesize = <64>;
 		};
+
+
+         sgtl5000: audio-codec@a {
+            #sound-dai-cells = <0>;
+            compatible = "fsl,sgtl5000";
+            reg = <0xa>;
+
+            VDDIO-supply = <&vmmc_3v3>;
+            VDDA-supply = <&vmmc_3v3>;
+            VDDD-supply = <&vqmmc_1v8>;
+            clocks = <&sys_mclk>;
+            sclk-strength = <3>;
+        };
 };
 
 &i2c2 {
