@@ -11,6 +11,7 @@
 #include <dt-bindings/pinctrl/pins-sdx9.h>
 #include <dt-bindings/memmap/d9/projects/default/image_cfg.h>
 #include <dt-bindings/memory/sdrv_ion.h>
+#include <dt-bindings/backlight/sdrv_backlight.h>
 #include <dt-bindings/rpmsg/sd,x9h-default.h>
 #include "d9-std.dtsi"
 #include "lcd-timings.dtsi"
@@ -250,9 +251,9 @@
 	};*/
 
 	semidrive_bl0: panel0-backlight {
-		compatible = "sd,rpmsg-bl"; /*"sd,rpmsg-bl" for rpmsg; "pwm-backlight" for native*/
+		compatible = "pwm-backlight"; /*"sd,rpmsg-bl" for rpmsg; "pwm-backlight" for native*/
 		bl_screen-id = /bits/ 32 <1>;
-		//pwms = <&pwm4 PWM_CH1 PWM_FREQUENCY PWM_POLARITY_INVERSED>;
+		pwms = <&pwm4 PWM_CH0 PWM_FREQUENCY PWM_POLARITY_INVERSED>;
 		brightness-levels = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
 							 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 							 31 32 33 34 35 36 37 38 39 40 41 42 43 44
@@ -1082,6 +1083,13 @@
 &pvt_sensor {
 	status = "okay";
 };
+
+&pwm4 {
+        sd,playback-num-chan = <2>;
+        #pwm-cells = <3>;
+        status = "okay";
+};
+
 
 &pwm6 {
         sd,playback-num-chan = <2>;
